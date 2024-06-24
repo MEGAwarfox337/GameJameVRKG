@@ -1,0 +1,2 @@
+# GameJameVRKG
+Mark, Fedya, Makar
