@@ -5,6 +5,7 @@ public class ObjectMover : MonoBehaviour
 {
     public float liftHeight = 2f; // Указанное значение подъема по оси Y в мировых координатах
     public float moveSpeed = 5f; // Скорость перемещения по осям X и Z
+    public GameObject activatedObject; // GameObject для активации при поднятии объекта
     private Rigidbody rb;
     private bool isRaised = false; // Флаг для отслеживания поднятия объекта
     private Quaternion originalRotation; // Исходное вращение объекта
@@ -12,8 +13,14 @@ public class ObjectMover : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true; // Начинаем с кинематического режима
+        rb.isKinematic = false; // Начинаем с динамического режима
         originalRotation = transform.rotation; // Сохраняем исходное вращение объекта
+
+        // Деактивируем объект, который будет активирован при поднятии
+        if (activatedObject != null)
+        {
+            activatedObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -37,6 +44,12 @@ public class ObjectMover : MonoBehaviour
 
                     isRaised = true; // Устанавливаем флаг поднятия объекта
                     rb.isKinematic = true; // Переводим Rigidbody в кинематический режим
+
+                    // Активируем объект, который должен быть активирован при поднятии
+                    if (activatedObject != null)
+                    {
+                        activatedObject.SetActive(true);
+                    }
                 }
             }
         }
@@ -55,6 +68,12 @@ public class ObjectMover : MonoBehaviour
             {
                 rb.isKinematic = false; // Возвращаем Rigidbody в динамический режим
                 isRaised = false; // Сбрасываем флаг поднятия объекта
+
+                // Деактивируем объект, который был активирован при поднятии
+                if (activatedObject != null)
+                {
+                    activatedObject.SetActive(false);
+                }
             }
         }
     }
