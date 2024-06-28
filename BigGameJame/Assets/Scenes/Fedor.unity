@@ -1233,7 +1233,6 @@ GameObject:
   m_Component:
   - component: {fileID: 165888645}
   - component: {fileID: 165888644}
-  - component: {fileID: 165888643}
   - component: {fileID: 165888642}
   m_Layer: 0
   m_Name: Figure1
@@ -1263,23 +1262,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &165888643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165888641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 908075460}
-  rotatableObject: {fileID: 37172975}
 --- !u!54 &165888644
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2132,7 +2114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 305270032}
   - component: {fileID: 305270031}
-  - component: {fileID: 305270030}
   - component: {fileID: 305270029}
   m_Layer: 0
   m_Name: Figure8
@@ -2162,23 +2143,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &305270030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305270028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1570741931}
-  rotatableObject: {fileID: 191097265}
 --- !u!54 &305270031
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2764,7 +2728,6 @@ GameObject:
   m_Component:
   - component: {fileID: 417587714}
   - component: {fileID: 417587713}
-  - component: {fileID: 417587712}
   - component: {fileID: 417587711}
   m_Layer: 0
   m_Name: Figure9
@@ -2794,23 +2757,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &417587712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417587710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1932114296}
-  rotatableObject: {fileID: 304243822}
 --- !u!54 &417587713
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5235,7 +5181,6 @@ GameObject:
   m_Component:
   - component: {fileID: 716159659}
   - component: {fileID: 716159658}
-  - component: {fileID: 716159657}
   - component: {fileID: 716159656}
   m_Layer: 0
   m_Name: Figure12
@@ -5265,23 +5210,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &716159657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716159655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1267417688}
-  rotatableObject: {fileID: 225941699}
 --- !u!54 &716159658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6649,7 +6577,6 @@ GameObject:
   m_Component:
   - component: {fileID: 939166428}
   - component: {fileID: 939166427}
-  - component: {fileID: 939166426}
   - component: {fileID: 939166425}
   m_Layer: 0
   m_Name: Figure10
@@ -6679,23 +6606,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &939166426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939166424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1546932093}
-  rotatableObject: {fileID: 1286069850}
 --- !u!54 &939166427
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6949,7 +6859,6 @@ GameObject:
   m_Component:
   - component: {fileID: 997118201}
   - component: {fileID: 997118200}
-  - component: {fileID: 997118199}
   - component: {fileID: 997118198}
   m_Layer: 0
   m_Name: Figure3
@@ -6979,23 +6888,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &997118199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997118197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 2118451287}
-  rotatableObject: {fileID: 1418273449}
 --- !u!54 &997118200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7577,7 +7469,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1137411293}
   - component: {fileID: 1137411292}
-  - component: {fileID: 1137411291}
   - component: {fileID: 1137411290}
   m_Layer: 0
   m_Name: Figure2
@@ -7607,23 +7498,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1137411291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137411289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1247067699}
-  rotatableObject: {fileID: 1829135633}
 --- !u!54 &1137411292
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8881,7 +8755,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1358696060}
   - component: {fileID: 1358696059}
-  - component: {fileID: 1358696058}
   - component: {fileID: 1358696057}
   m_Layer: 0
   m_Name: Figure11
@@ -8911,23 +8784,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1358696058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358696056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 63601196}
-  rotatableObject: {fileID: 1854623728}
 --- !u!54 &1358696059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9089,7 +8945,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1390489946}
   - component: {fileID: 1390489945}
-  - component: {fileID: 1390489944}
   - component: {fileID: 1390489943}
   m_Layer: 0
   m_Name: Figure4
@@ -9119,23 +8974,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1390489944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390489942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 1495409212}
-  rotatableObject: {fileID: 1599013310}
 --- !u!54 &1390489945
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9864,7 +9702,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1464832328}
   - component: {fileID: 1464832327}
-  - component: {fileID: 1464832326}
   - component: {fileID: 1464832325}
   m_Layer: 0
   m_Name: Figure6
@@ -9894,23 +9731,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1464832326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464832324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 2008383825}
-  rotatableObject: {fileID: 766411616}
 --- !u!54 &1464832327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10179,7 +9999,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1503967557}
   - component: {fileID: 1503967556}
-  - component: {fileID: 1503967555}
   - component: {fileID: 1503967554}
   m_Layer: 0
   m_Name: Figure5
@@ -10209,23 +10028,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1503967555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503967553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 676699039}
-  rotatableObject: {fileID: 244689174}
 --- !u!54 &1503967556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11800,7 +11602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1742146857}
   - component: {fileID: 1742146856}
-  - component: {fileID: 1742146855}
   - component: {fileID: 1742146854}
   m_Layer: 0
   m_Name: Figure7
@@ -11830,23 +11631,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1742146855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742146853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ded1a7e6961cf498f06dfe3de5d8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liftHeight: 2
-  moveSpeed: 5
-  rotationDuration: 0.1
-  activatedObject: {fileID: 612660644}
-  rotatableObject: {fileID: 499146856}
 --- !u!54 &1742146856
 Rigidbody:
   m_ObjectHideFlags: 0
