@@ -9,6 +9,7 @@ public class ObjectMover : MonoBehaviour
     public float rotationDuration = 1f; // Длительность вращения в секундах
     public GameObject activatedObject; // GameObject для активации при поднятии объекта
     public GameObject rotatableObject; // GameObject, который можно крутить
+    public float slowMoveSpeed = 2.5f; // Скорость перемещения при зажатой клавише Ctrl
     private Rigidbody rb;
     private bool isRaised = false; // Флаг для отслеживания поднятия объекта
     private bool isRotating = false; // Флаг для отслеживания вращения объекта
@@ -87,7 +88,7 @@ public class ObjectMover : MonoBehaviour
                     bool isCtrlPressed = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
                     // Устанавливаем скорость перемещения в зависимости от состояния клавиши Ctrl
-                    float currentMoveSpeed = isCtrlPressed ? originalMoveSpeed / 2f : originalMoveSpeed;
+                    float currentMoveSpeed = isCtrlPressed ? slowMoveSpeed : originalMoveSpeed;
 
                     Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
                     Vector3 moveAmount = moveDirection * currentMoveSpeed * Time.deltaTime;
