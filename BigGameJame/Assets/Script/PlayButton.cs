@@ -1,22 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems; // Import the EventSystems namespace
 
 public class PlayButton : MonoBehaviour
 {
-    public Color hoverColor = Color.red; // Color when hovering, can be adjusted via Inspector
+    public Color hoverColor = Color.red; // Цвет при наведении, можно настроить через Inspector
 
     private Color originalColor;
-    private Image buttonImage;
-    private LevelButton levelButton; // Reference to the selected level button
+    private LevelButton levelButton; // Ссылка на выбранную кнопку уровня
 
     void Start()
     {
-        buttonImage = GetComponent<Image>(); // Get the Image component of the button
-        originalColor = buttonImage.color; // Store the original color of the button
+        originalColor = GetComponent<Image>().color; // Получаем исходный цвет кнопки "Играть"
 
-        // Add EventTrigger component if not already added
+        // Добавляем EventTrigger компонент, если его еще нет
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
         if (trigger == null)
         {
@@ -41,24 +39,22 @@ public class PlayButton : MonoBehaviour
         if (levelButton != null && levelButton.isSelected)
         {
             string levelName = levelButton.gameObject.name;
-            SceneManager.LoadScene(levelName); // Load the level if a level button is selected
+            SceneManager.LoadScene(levelName); // Загружаем уровень, если кнопка уровня выбрана
         }
         else
         {
-            Debug.Log("Выберите уровень перед началом игры.");
+            Debug.Log("Выберите уровень перед игрой.");
         }
     }
 
     void OnPointerEnter()
     {
-        // Change Image color on pointer enter
-        buttonImage.color = hoverColor;
+        GetComponent<Image>().color = hoverColor; // Устанавливаем цвет при наведении
     }
 
     void OnPointerExit()
     {
-        // Restore original Image color on pointer exit
-        buttonImage.color = originalColor;
+        ResetColor(); // Возвращаем исходный цвет кнопки "Играть" при выходе курсора
     }
 
     public void SetLevelButton(LevelButton button)
@@ -68,6 +64,6 @@ public class PlayButton : MonoBehaviour
 
     public void ResetColor()
     {
-        buttonImage.color = originalColor; // Reset the button's color to the original color
+        GetComponent<Image>().color = originalColor; // Возвращаем цвет кнопки "Играть" к исходному
     }
 }

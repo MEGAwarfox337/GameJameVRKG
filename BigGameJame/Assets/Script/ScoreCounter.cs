@@ -1,44 +1,86 @@
-using UnityEngine;
+using UnityEngine; 
+ 
+public class ScoreCounter : MonoBehaviour 
+{ 
+    public int targetScore = 10; // Целевой счет для активации объектов 
+    public GameObject objectToActivate1; // Первый объект для активации 
+    public GameObject objectToActivate2; // Второй объект для активации 
+    public GameObject objectToActivate3; // Третий объект для активации 
+    public GameObject objectToActivate4; // Четвертый объект для активации
+    public GameObject buttonToDeactivate; // Кнопка, которую нужно деактивировать
+    public GameObject imageToDeactivate; // Изображение, которое нужно деактивировать
 
-public class ScoreCounter : MonoBehaviour
-{
-    public int targetScore = 10; // �������� ���������� ��� ��������� �������
-    public GameObject objectToActivate; // ������ ��� ���������
+    private int currentScore = 0; // Текущий счет 
+    
+    private void Start() 
+    { 
+        // Начальные настройки, если нужно
+    } 
+ 
+    // Увеличиваем счет на 1 
+    public void IncrementScore() 
+    { 
+        currentScore++; 
+        CheckScore(); 
+        Debug.Log("Current Score: " + currentScore); // Выводим текущий счет в консоль 
+    } 
+ 
+    // Уменьшаем счет на 1 
+    public void DecrementScore() 
+    { 
+        currentScore--; 
+        CheckScore(); 
+        Debug.Log("Current Score: " + currentScore); // Выводим текущий счет в консоль 
+    } 
+ 
+    // Проверяем счет и активируем/деактивируем объекты соответственно 
+    private void CheckScore() 
+    { 
+        if (currentScore >= targetScore) 
+        { 
+            // Активируем объекты 
+            if (objectToActivate1 != null) 
+                objectToActivate1.SetActive(true); 
+             
+            if (objectToActivate2 != null) 
+                objectToActivate2.SetActive(true); 
+             
+            if (objectToActivate3 != null) 
+                objectToActivate3.SetActive(true);
 
-    private int currentScore = 0; // ������� �������� ��������
+            if (objectToActivate4 != null) 
+                objectToActivate4.SetActive(true); 
+            
+            // Деактивируем кнопку
+            if (buttonToDeactivate != null)
+                buttonToDeactivate.SetActive(false);
 
-    // ����� ��� ���������� �������� �� 1
-    public void IncrementScore()
-    {
-        currentScore++;
-        CheckScore();
-        Debug.Log("Current Score: " + currentScore); // ����� �������� ����� � �������
-    }
+            // Деактивируем изображение
+            if (imageToDeactivate != null)
+                imageToDeactivate.SetActive(false);
+        } 
+        else 
+        { 
+            // Деактивируем объекты 
+            if (objectToActivate1 != null) 
+                objectToActivate1.SetActive(false); 
+             
+            if (objectToActivate2 != null) 
+                objectToActivate2.SetActive(false); 
+             
+            if (objectToActivate3 != null) 
+                objectToActivate3.SetActive(false);
 
-    // ����� ��� ���������� �������� �� 1
-    public void DecrementScore()
-    {
-        currentScore--;
-        CheckScore();
-        Debug.Log("Current Score: " + currentScore); // ����� �������� ����� � �������
-    }
+            if (objectToActivate4 != null) 
+                objectToActivate4.SetActive(false); 
 
-    // �������� �������� �������� �������� � ��������� �������, ���� �����
-    private void CheckScore()
-    {
-        if (currentScore >= targetScore)
-        {
-            if (objectToActivate != null)
-            {
-                objectToActivate.SetActive(true);
-            }
-        }
-        else
-        {
-            if (objectToActivate != null)
-            {
-                objectToActivate.SetActive(false);
-            }
-        }
-    }
+            // Активируем кнопку (если нужно, можно удалить эту часть)
+            if (buttonToDeactivate != null)
+                buttonToDeactivate.SetActive(true);
+
+            // Активируем изображение (если нужно, можно удалить эту часть)
+            if (imageToDeactivate != null)
+                imageToDeactivate.SetActive(true);
+        } 
+    } 
 }
