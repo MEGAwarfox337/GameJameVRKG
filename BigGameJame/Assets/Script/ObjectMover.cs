@@ -1,29 +1,35 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ObjectMover : MonoBehaviour
 {
-    public float liftHeight = 2f; // Указанное значение подъема по оси Y в мировых координатах
-    public float moveSpeed = 5f; // Скорость перемещения по осям X и Z
-    public float rotationDuration = 1f; // Длительность вращения в секундах
-    public GameObject activatedObject; // GameObject для активации при поднятии объекта
-    public GameObject rotatableObject; // GameObject, который можно крутить
-    public float slowMoveSpeed = 2.5f; // Скорость перемещения при зажатой клавише Ctrl
+    public float liftHeight = 2f; // Р’С‹СЃРѕС‚Р° РїРѕРґСЉРµРјР° РѕР±СЉРµРєС‚Р° РїРѕ РѕСЃРё Y РїСЂРё Р°РєС‚РёРІР°С†РёРё
+    public float moveSpeed = 5f; // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РѕСЃСЏРј X Рё Z
+    public float rotationDuration = 1f; // Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р° РІ СЃРµРєСѓРЅРґР°С…
+    public GameObject activatedObject; // GameObject РґР»СЏ Р°РєС‚РёРІР°С†РёРё РїСЂРё РїРѕРґРЅСЏС‚РёРё РѕР±СЉРµРєС‚Р°
+    public GameObject rotatableObject; // GameObject, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РІСЂР°С‰Р°С‚СЊСЃСЏ
+    public float slowMoveSpeed = 2.5f; // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїСЂРё СѓРґРµСЂР¶РёРІР°РЅРёРё Ctrl
+    public GraphicRaycaster raycaster; // GraphicRaycaster РґР»СЏ Canvas
+    public EventSystem eventSystem; // EventSystem РґР»СЏ РїСЂРѕРІРµСЂРєРё UI
+
     private Rigidbody rb;
-    private bool isRaised = false; // Флаг для отслеживания поднятия объекта
-    private bool isRotating = false; // Флаг для отслеживания вращения объекта
-    private Quaternion originalRotation; // Исходное вращение объекта
-    private float originalMoveSpeed; // Исходная скорость перемещения
+    private bool isRaised = false; // Р¤Р»Р°Рі РґР»СЏ РїСЂРѕРІРµСЂРєРё, РїРѕРґРЅСЏС‚ Р»Рё РѕР±СЉРµРєС‚
+    private bool isRotating = false; // Р¤Р»Р°Рі РґР»СЏ РїСЂРѕРІРµСЂРєРё, РїСЂРѕРёСЃС…РѕРґРёС‚ Р»Рё РІСЂР°С‰РµРЅРёРµ
+    private Quaternion originalRotation; // РСЃС…РѕРґРЅР°СЏ СЂРѕС‚Р°С†РёСЏ РѕР±СЉРµРєС‚Р°
+    private float originalMoveSpeed; // РСЃС…РѕРґРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = false; // Начинаем с динамического режима
-        originalRotation = transform.rotation; // Сохраняем исходное вращение объекта
-        originalMoveSpeed = moveSpeed; // Сохраняем исходную скорость перемещения
+        rb.isKinematic = false; // РћС‚РєР»СЋС‡Р°РµРј РєРёРЅРµРјР°С‚РёРєСѓ Rigidbody
+        originalRotation = transform.rotation; // РЎРѕС…СЂР°РЅСЏРµРј РёСЃС…РѕРґРЅСѓСЋ СЂРѕС‚Р°С†РёСЋ РѕР±СЉРµРєС‚Р°
+        originalMoveSpeed = moveSpeed; // РЎРѕС…СЂР°РЅСЏРµРј РёСЃС…РѕРґРЅСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ
 
-        // Деактивируем объект, который будет активирован при поднятии
+        // Р”РµР°РєС‚РёРІРёСЂСѓРµРј РѕР±СЉРµРєС‚, РєРѕС‚РѕСЂС‹Р№ РґРѕР»Р¶РµРЅ Р°РєС‚РёРІРёСЂРѕРІР°С‚СЊСЃСЏ РїСЂРё РїРѕРґРЅСЏС‚РёРё
         if (activatedObject != null)
         {
             activatedObject.SetActive(false);
@@ -32,9 +38,11 @@ public class ObjectMover : MonoBehaviour
 
     void Update()
     {
+        if (IsPointerOverUI()) return; // РџСЂРѕРІРµСЂСЏРµРј, РЅР°С…РѕРґРёС‚СЃСЏ Р»Рё РєСѓСЂСЃРѕСЂ РЅР°Рґ UI-СЌР»РµРјРµРЅС‚РѕРј
+
         if (!isRaised && !isRotating && Input.GetMouseButtonDown(0))
         {
-            // Проверяем, что нажат объект с текущим скриптом
+            // Р’С‹РїСѓСЃРєР°РµРј Р»СѓС‡ РёР· РєР°РјРµСЂС‹ С‡РµСЂРµР· РїРѕР·РёС†РёСЋ РєСѓСЂСЃРѕСЂР°
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -48,46 +56,46 @@ public class ObjectMover : MonoBehaviour
         }
         else if (isRaised && !isRotating)
         {
-            // Проверяем, зажата ли клавиша Shift
+            // РџСЂРѕРІРµСЂСЏРµРј, СѓРґРµСЂР¶РёРІР°РµС‚СЃСЏ Р»Рё РєР»Р°РІРёС€Р° Shift
             bool isShiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-            // Если зажата клавиша Shift, то производим плавное вращение на 90 градусов
+            // Р•СЃР»Рё СѓРґРµСЂР¶РёРІР°РµС‚СЃСЏ РєР»Р°РІРёС€Р° Shift, С‚Рѕ РІС‹РїРѕР»РЅСЏРµРј РїРѕРІРѕСЂРѕС‚ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ
             if (isShiftPressed && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)))
             {
                 Vector3 rotationAxis = Vector3.zero;
 
-                // Определяем ось вращения в зависимости от нажатой клавиши
+                // РћРїСЂРµРґРµР»СЏРµРј РѕСЃСЊ РїРѕРІРѕСЂРѕС‚Р° РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    rotationAxis = Vector3.left; // Поворот вокруг оси X
+                    rotationAxis = Vector3.left; // РџРѕРІРѕСЂРѕС‚ РІРѕРєСЂСѓРі РѕСЃРё X
                 }
                 else if (Input.GetKeyDown(KeyCode.A))
                 {
-                    rotationAxis = Vector3.down; // Поворот вокруг оси Y в отрицательном направлении
+                    rotationAxis = Vector3.down; // РџРѕРІРѕСЂРѕС‚ РІРѕРєСЂСѓРі РѕСЃРё Y РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
                 }
                 else if (Input.GetKeyDown(KeyCode.S))
                 {
-                    rotationAxis = Vector3.right; // Поворот вокруг оси X в отрицательном направлении
+                    rotationAxis = Vector3.right; // РџРѕРІРѕСЂРѕС‚ РІРѕРєСЂСѓРі РѕСЃРё X РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
                 }
                 else if (Input.GetKeyDown(KeyCode.D))
                 {
-                    rotationAxis = Vector3.up; // Поворот вокруг оси Y
+                    rotationAxis = Vector3.up; // РџРѕРІРѕСЂРѕС‚ РІРѕРєСЂСѓРі РѕСЃРё Y
                 }
 
                 StartCoroutine(RotateObject(rotationAxis * 90f, rotationDuration));
             }
             else
             {
-                // Если клавиша Shift не зажата, то выполняем перемещение объекта по осям X и Z
+                // Р•СЃР»Рё РєР»Р°РІРёС€Р° Shift РЅРµ СѓРґРµСЂР¶РёРІР°РµС‚СЃСЏ, С‚Рѕ РїРµСЂРµРјРµС‰Р°РµРј РѕР±СЉРµРєС‚ РїРѕ РѕСЃСЏРј X Рё Z
                 if (!isShiftPressed)
                 {
                     float moveHorizontal = Input.GetAxis("Horizontal");
                     float moveVertical = Input.GetAxis("Vertical");
 
-                    // Проверяем, зажата ли клавиша Ctrl
+                    // РџСЂРѕРІРµСЂСЏРµРј, СѓРґРµСЂР¶РёРІР°РµС‚СЃСЏ Р»Рё РєР»Р°РІРёС€Р° Ctrl
                     bool isCtrlPressed = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
-                    // Устанавливаем скорость перемещения в зависимости от состояния клавиши Ctrl
+                    // РћРїСЂРµРґРµР»СЏРµРј С‚РµРєСѓС‰СѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СѓРґРµСЂР¶РёРІР°РЅРёСЏ Ctrl
                     float currentMoveSpeed = isCtrlPressed ? slowMoveSpeed : originalMoveSpeed;
 
                     Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
@@ -96,13 +104,13 @@ public class ObjectMover : MonoBehaviour
                 }
             }
 
-            // Если нажата кнопка ЛКМ, опускаем объект
+            // Р•СЃР»Рё РЅР°Р¶Р°С‚Р° Р»РµРІР°СЏ РєРЅРѕРїРєР° РјС‹С€Рё, РѕРїСѓСЃРєР°РµРј РѕР±СЉРµРєС‚
             if (Input.GetMouseButtonDown(0))
             {
-                rb.isKinematic = false; // Возвращаем Rigidbody в динамический режим
-                isRaised = false; // Сбрасываем флаг поднятия объекта
+                rb.isKinematic = false; // РћС‚РєР»СЋС‡Р°РµРј РєРёРЅРµРјР°С‚РёРєСѓ Rigidbody
+                isRaised = false; // РЎР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі РїРѕРґРЅСЏС‚РёСЏ
 
-                // Деактивируем объект, который был активирован при поднятии
+                // Р”РµР°РєС‚РёРІРёСЂСѓРµРј РѕР±СЉРµРєС‚, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» Р°РєС‚РёРІРёСЂРѕРІР°РЅ РїСЂРё РїРѕРґРЅСЏС‚РёРё
                 if (activatedObject != null)
                 {
                     activatedObject.SetActive(false);
@@ -113,29 +121,29 @@ public class ObjectMover : MonoBehaviour
 
     IEnumerator RaiseObject()
     {
-        isRaised = true; // Устанавливаем флаг поднятия объекта
-        rb.isKinematic = true; // Переводим Rigidbody в кинематический режим
+        isRaised = true; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі РїРѕРґРЅСЏС‚РёСЏ
+        rb.isKinematic = true; // Р’РєР»СЋС‡Р°РµРј РєРёРЅРµРјР°С‚РёРєСѓ Rigidbody
 
-        // Поднимаем объект на заданное значение liftHeight по оси Y в мировых координатах
+        // РџРµСЂРµРјРµС‰Р°РµРј РѕР±СЉРµРєС‚ РІРІРµСЂС… РЅР° Р·Р°РґР°РЅРЅСѓСЋ РІС‹СЃРѕС‚Сѓ
         Vector3 newPosition = transform.position + new Vector3(0, liftHeight, 0);
         transform.position = newPosition;
 
-        // Устанавливаем вращение объекта в исходное состояние
+        // РЎР±СЂР°СЃС‹РІР°РµРј СЂРѕС‚Р°С†РёСЋ РѕР±СЉРµРєС‚Р° РЅР° РёСЃС…РѕРґРЅСѓСЋ
         transform.rotation = originalRotation;
 
-        // Активируем объект, который должен быть активирован при поднятии
+        // РђРєС‚РёРІРёСЂСѓРµРј РѕР±СЉРµРєС‚, РµСЃР»Рё РѕРЅ РЅР°Р·РЅР°С‡РµРЅ
         if (activatedObject != null)
         {
             activatedObject.SetActive(true);
         }
 
-        // Ждем завершения поднятия перед разрешением новых действий
+        // РћР¶РёРґР°РµРј РґРѕ СЃР»РµРґСѓСЋС‰РµРіРѕ РєР°РґСЂР°
         yield return null;
     }
 
     IEnumerator RotateObject(Vector3 angles, float duration)
     {
-        isRotating = true; // Устанавливаем флаг вращения объекта
+        isRotating = true; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі РІСЂР°С‰РµРЅРёСЏ
 
         Quaternion startRotation = rotatableObject.transform.rotation;
         Quaternion endRotation = rotatableObject.transform.rotation * Quaternion.Euler(angles);
@@ -150,6 +158,17 @@ public class ObjectMover : MonoBehaviour
 
         rotatableObject.transform.rotation = endRotation;
 
-        isRotating = false; // Сбрасываем флаг вращения после завершения
+        isRotating = false; // РЎР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі РІСЂР°С‰РµРЅРёСЏ
+    }
+
+    private bool IsPointerOverUI()
+    {
+        PointerEventData eventData = new PointerEventData(eventSystem);
+        eventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        raycaster.Raycast(eventData, results);
+
+        return results.Count > 0;
     }
 }
