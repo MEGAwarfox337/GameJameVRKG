@@ -7,8 +7,10 @@ public class ScoreCounter : MonoBehaviour
     public GameObject objectToActivate2; // Второй объект для активации 
     public GameObject objectToActivate3; // Третий объект для активации 
     public GameObject objectToActivate4; // Четвертый объект для активации
+    public GameObject objectToActivate5; // Пятый объект для активации
     public GameObject buttonToDeactivate; // Кнопка, которую нужно деактивировать
     public GameObject imageToDeactivate; // Изображение, которое нужно деактивировать
+    public GameObject objectToDeactivate; // Объект, который нужно деактивировать
 
     private int currentScore = 0; // Текущий счет 
     
@@ -49,7 +51,10 @@ public class ScoreCounter : MonoBehaviour
                 objectToActivate3.SetActive(true);
 
             if (objectToActivate4 != null) 
-                objectToActivate4.SetActive(true); 
+                objectToActivate4.SetActive(true);
+
+            if (objectToActivate5 != null) 
+                objectToActivate5.SetActive(true); 
             
             // Деактивируем кнопку
             if (buttonToDeactivate != null)
@@ -58,6 +63,9 @@ public class ScoreCounter : MonoBehaviour
             // Деактивируем изображение
             if (imageToDeactivate != null)
                 imageToDeactivate.SetActive(false);
+
+            if (objectToDeactivate != null) 
+                objectToDeactivate.SetActive(false);
         } 
         else 
         { 
@@ -72,7 +80,10 @@ public class ScoreCounter : MonoBehaviour
                 objectToActivate3.SetActive(false);
 
             if (objectToActivate4 != null) 
-                objectToActivate4.SetActive(false); 
+                objectToActivate4.SetActive(false);
+
+            if (objectToActivate5 != null) 
+                objectToActivate5.SetActive(false); 
 
             // Активируем кнопку (если нужно, можно удалить эту часть)
             if (buttonToDeactivate != null)
@@ -81,6 +92,9 @@ public class ScoreCounter : MonoBehaviour
             // Активируем изображение (если нужно, можно удалить эту часть)
             if (imageToDeactivate != null)
                 imageToDeactivate.SetActive(true);
+
+            if (objectToDeactivate != null) 
+                objectToDeactivate.SetActive(true);
         } 
     } 
 }

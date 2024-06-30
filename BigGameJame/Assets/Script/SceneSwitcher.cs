@@ -2,10 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SceneSwitcher : MonoBehaviour
 {
     public Color hoverColor = Color.red; // Цвет при наведении, можно настроить через Inspector
+    public AudioClip buttonClip;  // Аудиоклип для кнопки
+    public AudioSource audioSource;  // Аудиоисточник для воспроизведения звука
 
     private Image buttonImage;
     private Color originalColor;
@@ -44,9 +47,58 @@ public class SceneSwitcher : MonoBehaviour
         buttonImage.color = originalColor;
     }
 
-    // Метод, который будет вызываться при нажатии кнопки
+    // Метод для переключения сцены
     public void SwitchScene(string sceneName)
     {
+        // Если аудиоисточник и аудиоклип назначены
+        if (audioSource != null && buttonClip != null)
+        {
+            StartCoroutine(PlaySoundAndSwitchScene(sceneName));
+        }
+        else
+        {
+            // Если аудиоисточник или аудиоклип не назначены, сразу переходим на сцену
+            SceneManager.LoadScene(sceneName);
+        }
+    }
+
+    IEnumerator PlaySoundAndSwitchScene(string sceneName)
+    {
+        // Воспроизводим звук
+        audioSource.PlayOneShot(buttonClip);
+        // Ждем окончания звука
+        yield return new WaitForSeconds(buttonClip.length);
+        // Переходим на новую сцену
         SceneManager.LoadScene(sceneName);
+    }
+
+    // Метод для выхода из игры
+    public void QuitGame()
+    {
+        // Выводим сообщение в консоль, чтобы убедиться, что метод вызывается
+        Debug.Log("QuitGame called");
+
+        // Если аудиоисточник и аудиоклип назначены
+        if (audioSource != null && buttonClip != null)
+        {
+            StartCoroutine(PlaySoundAndQuitGame());
+        }
+        else
+        {
+            // Если аудиоисточник или аудиоклип не назначены, сразу выходим из игры
+            Application.Quit();
+            Debug.Log("Application.Quit called");
+        }
+    }
+
+    IEnumerator PlaySoundAndQuitGame()
+    {
+        // Воспроизводим звук
+        audioSource.PlayOneShot(buttonClip);
+        // Ждем окончания звука
+        yield return new WaitForSeconds(buttonClip.length);
+        // Выходим из игры
+        Application.Quit();
+        Debug.Log("Application.Quit called after sound");
     }
 }

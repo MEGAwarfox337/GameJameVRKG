@@ -22,6 +22,8 @@ public class ObjectMover : MonoBehaviour
     private Quaternion originalRotation; // Исходная ротация объекта
     private float originalMoveSpeed; // Исходная скорость перемещения
 
+    private static bool anyObjectRaised = false; // Статический флаг для отслеживания, поднят ли какой-либо объект
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,7 +42,7 @@ public class ObjectMover : MonoBehaviour
     {
         if (IsPointerOverUI()) return; // Проверяем, находится ли курсор над UI-элементом
 
-        if (!isRaised && !isRotating && Input.GetMouseButtonDown(0))
+        if (!isRaised && !isRotating && !anyObjectRaised && Input.GetMouseButtonDown(0))
         {
             // Выпускаем луч из камеры через позицию курсора
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -48,6 +50,7 @@ public class ObjectMover : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                // Проверяем, является ли объект, по которому был произведен клик, активным объектом
                 if (hit.collider.gameObject == gameObject)
                 {
                     StartCoroutine(RaiseObject());
@@ -109,6 +112,7 @@ public class ObjectMover : MonoBehaviour
             {
                 rb.isKinematic = false; // Отключаем кинематику Rigidbody
                 isRaised = false; // Сбрасываем флаг поднятия
+                anyObjectRaised = false; // Сбрасываем глобальный флаг
 
                 // Деактивируем объект, который был активирован при поднятии
                 if (activatedObject != null)
@@ -122,6 +126,7 @@ public class ObjectMover : MonoBehaviour
     IEnumerator RaiseObject()
     {
         isRaised = true; // Устанавливаем флаг поднятия
+        anyObjectRaised = true; // Устанавливаем глобальный флаг
         rb.isKinematic = true; // Включаем кинематику Rigidbody
 
         // Перемещаем объект вверх на заданную высоту
