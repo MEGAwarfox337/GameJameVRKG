@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MENU.unity
     guid: 9b24a37cd7af50e47870108c11c686a2
   - enabled: 1
-    path: Assets/Scenes/MakarScene.unity
-    guid: 8e1c45827565bc442b65022cdd06f930
-  - enabled: 1
     path: Assets/Scenes/LevelSelection.unity
     guid: e995bfb8827bd1946ab9b793ef91dd18
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 94ab8e4ceda72bf48a9aad08e2da7061
+  - enabled: 1
+    path: Assets/Scenes/MakarScene.unity
+    guid: 8e1c45827565bc442b65022cdd06f930
   - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: 608dee73c56a2e844b14ee34784b1f63
